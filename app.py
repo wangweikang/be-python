@@ -18,10 +18,9 @@ def register_blueprint(app):
     app.blueprint(route_category)
 
 
-# todo, 首页暂时重定向
-# @app.route('/', methods=['GET'])
-# def index(request):
-    # return redirect('/articles')
+@app.route('/', methods=['GET'])
+def index(request):
+    return return template('index.html')
 
 
 @app.exception(Forbidden)

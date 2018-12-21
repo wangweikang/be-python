@@ -1,4 +1,4 @@
-proc_name = 'blog-sanic'
+proc_name = 'be-python'
 bind = "unix:/tmp/{}.sock".format(proc_name)
 workers = 2
 worker_class = 'sanic.worker.GunicornWorker'
