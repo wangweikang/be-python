@@ -20,7 +20,7 @@ def register_blueprint(app):
 
 @app.route('/', methods=['GET'])
 def index(request):
-    return return template('index.html')
+    return template('index.html')
 
 
 @app.exception(Forbidden)
