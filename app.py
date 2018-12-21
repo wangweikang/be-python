@@ -1,6 +1,7 @@
 from sanic import Sanic
 from sanic.exceptions import Forbidden
 from sanic.response import json as jsonResponse, redirect
+from routes import template
 
 app = Sanic(__name__)
 
@@ -20,7 +21,7 @@ def register_blueprint(app):
 
 @app.route('/', methods=['GET'])
 def index(request):
-    return template('index.html')
+    return template('/index.html')
 
 
 @app.exception(Forbidden)
