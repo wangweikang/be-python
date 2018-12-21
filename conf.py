@@ -1,2 +1,2 @@
-key = "alluvku's key"
-salt = 'dauvku'
+key = "xiongchui's key"
+salt = 'xiongchui'
