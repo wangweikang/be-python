@@ -15,7 +15,7 @@ services:
     build: .
     restart: always
     volumes:
-    - ./app:/usr/src/app
+    - ./app:/www/be-python/app
     links:
     - sentinel
     - redis-master:db

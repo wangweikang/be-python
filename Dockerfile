@@ -1,6 +1,6 @@
 FROM django:latest
 
-COPY ./app /usr/src/app
+COPY ./app /www/be-python/app
 
 COPY supervisord.conf /etc/supervisord.conf
 
@@ -12,11 +12,11 @@ RUN apt-get update && \
 
 RUN pip install meinheld && \
     pip install gunicorn && \
-    cd /usr/src/app && \
+    cd /www/be-python/app && \
     pip install -r requirement.txt && \
     python manage.py makemigrations && \
     python manage.py migrate
 
-WORKDIR /usr/src/app
+WORKDIR /www/be-python/app
 
 CMD supervisord -c /etc/supervisord.conf
