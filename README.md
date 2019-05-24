@@ -1,13 +1,6 @@
-# blog-sanic
+Usage:
 
-## description
-a blog app using Sanic and MongoDB
-
-## you need know
-- this app need python3.5 +
-- before install requirements you should run this
-    ```sh
-    sudo -s
-    sh install.sh
-    sh deploy.sh
-    ```
+```
+./build.sh
+curl http://127.0.0.1
+```

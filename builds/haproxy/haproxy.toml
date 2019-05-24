@@ -1,0 +1,9 @@
+[template]
+src = "haproxy.tmpl"
+dest = "/usr/local/etc/haproxy/haproxy.cfg"
+keys = [
+    "/app/servers"
+]
+owner = "root"
+mode = "0644"
+reload_cmd = "kill -HUP 1"

@@ -1,0 +1,1 @@
+./confd -interval 10 -node http://etcd:2379 -config-file /etc/confd/conf.d/haproxy.toml

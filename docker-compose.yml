@@ -1,0 +1,64 @@
+version: '2.1'
+services:
+  haproxy:
+    container_name: lb
+    build: ./builds/haproxy
+    ports:
+     - 80:6301
+    restart: always
+    links:
+    - ping-app
+    - etcd:etcd
+    - netdata:netdata
+
+  ping-app:
+    build: .
+    restart: always
+    volumes:
+    - ./app:/usr/src/app
+    links:
+    - sentinel
+    - redis-master:db
+
+  redis-master:
+    image: redis:latest
+    ports:
+     - 6379:6379
+    restart: always
+
+  redis-slave:
+    image: redis:latest
+    command: redis-server --slaveof master 6379
+    restart: always
+    links:
+    - redis-master:master
+ 
+  sentinel:
+    build: ./builds/sentinel
+    restart: always
+    links:
+    - redis-master:redis-master
+    - redis-slave
+
+  etcd:
+    image: elcolio/etcd
+    command: -name etcd -initial-cluster-token=etcd-cluster-1 -initial-cluster="etcd=http://etcd:2380" -initial-cluster-state=new -advertise-client-urls=http://etcd:2379 -initial-advertise-peer-urls http://etcd:2380
+    environment:
+     - CLIENT_URLS=http://0.0.0.0:2379
+     - PEER_URLS=http://0.0.0.0:2380
+    ports:
+     - 2379:2379
+     - 2380:2380
+     - 4001:4001
+     - 7001:7001
+    volumes:
+     - /etc/ssl/certs/:/etc/ssl/certs/
+
+  netdata:
+    image: titpetric/netdata
+    restart: always
+    cap_add:
+     - SYS_PTRACE
+    volumes:
+     - /proc:/host/proc:ro
+     - /sys:/host/sys:ro
