@@ -1,6 +1,5 @@
 Usage:
 
 ```
-./build.sh
-curl http://127.0.0.1
+bash run.sh
 ```
