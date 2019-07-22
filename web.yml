@@ -15,9 +15,7 @@ services:
       - web_net
 
   web:
-    build: ./main
-    ports:
-      - "8000:8080"
+    image: registry.thiswjk.xyz/web:latest
     volumes:
       - ./:/mysite
       - /tmp/logs:/tmp
@@ -50,7 +48,7 @@ services:
       - redis_net
 
   sentinel:
-    build: ./sentinel
+    image: registry.thiswjk.xyz/sentinel:latest
     deploy:
       replicas: 3
     networks:
