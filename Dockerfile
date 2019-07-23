@@ -10,6 +10,8 @@ WORKDIR /mysite
 ADD . /mysite
 RUN pip3 install -i https://pypi.douban.com/simple -r requirements.txt
 
+ENTRYPOINT ["sh", "start.sh"]
+
 #对外暴露端口
 EXPOSE 8080 8000
 

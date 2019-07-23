@@ -1,4 +1,4 @@
-version: "3"
+version: "3.5"
 
 services:
   db:
@@ -19,7 +19,6 @@ services:
     volumes:
       - ./:/mysite
       - /tmp/logs:/tmp
-    command: bash start.sh  # 执行命令，有多种格式
     depends_on:
       - db
       - sentinel
@@ -27,6 +26,11 @@ services:
     networks:
       - nginx-net
       - web_net
+    environment:
+      VIRTUAL_HOST: api.thiswjk.xyz
+      VIRTUAL_PORT: 8080
+      LETSENCRYPT_HOST: api.thiswjk.xyz
+      LETSENCRYPT_EMAIL: kangmang92@gmail.com
 
   redis-master:
     image: redis:latest
@@ -36,7 +40,7 @@ services:
       - ./data/redis:/data
     entrypoint: redis-server --appendonly yes
     networks:
-      - web_network
+      - web_net
       - redis_net
 
   redis-slave:
@@ -45,16 +49,22 @@ services:
     deploy:
       replicas: 2
     networks:
+      - web_net
       - redis_net
 
   sentinel:
     image: registry.thiswjk.xyz/sentinel:latest
+    depends_on:
+      - redis-master
     deploy:
       replicas: 3
     networks:
       - redis_net
       
 networks:
+  web_net:
+    name: web_net
   redis_net:
+    name: redis_net
   nginx-net:
     external: true
