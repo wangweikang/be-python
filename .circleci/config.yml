@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Push to registry
           command: |
-            docker login registry.thiswjk.xyz -u will -p xyxz1401201
+            docker login registry.thiswjk.xyz -u ${user} -p ${passd}
             docker tag app registry.thiswjk.xyz/will/web
             docker push registry.thiswjk.xyz/will/web
   deploy:
@@ -43,7 +43,7 @@ jobs:
       - run:
           name: update service
           command: |
-            curl -X POST https://portainer.thiswjk.xyz/api/webhooks/eee60553-6247-4202-b4e3-9f0225e5b381
+            curl -X POST ${web_webhooks}
 workflows:
   version: 2
   build-and-deploy:
