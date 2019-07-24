@@ -34,8 +34,8 @@ jobs:
           name: Push to registry
           command: |
             docker login registry.thiswjk.xyz -u will -p xyxz1401201
-            docker tag app registry.thiswjk.xyz/app
-            docker push registry.thiswjk.xyz/app
+            docker tag app registry.thiswjk.xyz/will/web
+            docker push registry.thiswjk.xyz/will/web
   deploy:
     machine:
       enabled: true
