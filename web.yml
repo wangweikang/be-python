@@ -15,14 +15,10 @@ services:
       - web_net
 
   web:
-    image: registry.thiswjk.xyz/web:latest
+    image: registry.thiswjk.xyz/will/web:latest
     volumes:
       - ./:/mysite
       - /tmp/logs:/tmp
-    depends_on:
-      - db
-      - sentinel
-      - redis-master
     networks:
       - nginx-net
       - web_net
@@ -34,32 +30,36 @@ services:
 
   redis-master:
     image: redis:latest
-    ports:
-     - 6379:6379
     volumes:
       - ./data/redis:/data
     entrypoint: redis-server --appendonly yes
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     networks:
-      - web_net
       - redis_net
+      - web_net
 
   redis-slave:
     image: redis:latest
     command: redis-server --slaveof redis-master 6379
     deploy:
       replicas: 2
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     networks:
-      - web_net
-      - redis_net
+      [ redis_net ]
 
   sentinel:
-    image: registry.thiswjk.xyz/sentinel:latest
-    depends_on:
-      - redis-master
+    image: registry.thiswjk.xyz/will/sentinel:latest
+    ports:
+      - 26379:26379
     deploy:
       replicas: 3
     networks:
+      - web_net
       - redis_net
+    environment:
+      - REDIS_MASTER_HOST=redis-master
       
 networks:
   web_net:
