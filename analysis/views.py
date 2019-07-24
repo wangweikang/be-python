@@ -7,9 +7,8 @@ from redis.sentinel import Sentinel
 sentinel = Sentinel([('sentinel', 26379)], socket_timeout=0.1)
 rds = sentinel.master_for('master', socket_timeout=0.1)
 
-def ping(request): 
-    # rds.incr('count', 1)
-    # cnt = rds.get('count')
-    # cnt = '0' if cnt is None else cnt
-    # return HttpResponse(cnt)
-    return sentinel.discover_master('master')
+def ping(request):
+    rds.incr('count', 1)
+    cnt = rds.get('count')
+    cnt = '0' if cnt is None else cnt
+    return HttpResponse(cnt)
