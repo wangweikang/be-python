@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'checkin.apps.CheckinConfig',
     'common.apps.CommonConfig',
     'analysis.apps.AnalysisConfig',
     'polls.apps.PollsConfig',

@@ -21,11 +21,13 @@ from django.views import static
 from common.urls import urlpatterns as common_urls
 from analysis.urls import urlpatterns as analysis_urls
 from polls.urls import urlpatterns as polls_urls
+from checkin.urls import urlpatterns as checkin_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(common_urls)),
-    path('api/v1/analysis/', include(analysis_urls)),
-    path('api/v1/polls/', include(polls_urls)),
+    path('/', include(common_urls)),
+    path('/analysis/', include(analysis_urls)),
+    path('/polls/', include(polls_urls)),
+    path('/checkin/', include(checkin_urls)),
     re_path(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}, name='static'),
 ]
