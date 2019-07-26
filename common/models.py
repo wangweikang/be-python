@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .BaseManager import BaseManager
+
+
+class BaseManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_deleted=False)
 
 
 class BaseModel(models.Model):
