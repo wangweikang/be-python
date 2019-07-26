@@ -25,9 +25,9 @@ from checkin.urls import urlpatterns as checkin_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', include(common_urls)),
-    path('/analysis/', include(analysis_urls)),
-    path('/polls/', include(polls_urls)),
-    path('/checkin/', include(checkin_urls)),
+    path('', include(common_urls)),
+    path('analysis', include(analysis_urls)),
+    path('polls', include(polls_urls)),
+    path('checkin', include(checkin_urls)),
     re_path(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}, name='static'),
 ]
