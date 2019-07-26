@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from checkin.views import CheckInCreate, CommentCreate, AuthorUpdate
 
 urlpatterns = [
     # path('', views.index, name='index'),
