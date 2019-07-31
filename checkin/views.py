@@ -1,23 +1,16 @@
-from django.http import HttpResponse
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from rest_framework.permissions import AllowAny
 from checkin.models import WxUser, Comments
+from rest_framework.viewsets import ModelViewSet
+from .serializers import WxUserSerializer, CommentsSerializer
 
 
-class CheckInCreate(CreateView):
-    model = WxUser
-    fields = ['nick_name', 'avatar_url']
+class CheckInViewSet(ModelViewSet):
+    queryset = WxUser.objects.all()
+    serializer_class = WxUserSerializer
+    permission_classes = (AllowAny, )
+    
 
-
-class CommentCreate(CreateView):
-    model = Comments
-    fields = ['user_nick_name', 'comments']
-
-
-class CommentUpdate(UpdateView):
-    model = Comments
-    fields = ['user_nick_name', 'comments']
-
-# class CommentDelete(DeleteView):
-#     model = Comments
-#     success_url = reverse_lazy('')
+class CommentViewSet(ModelViewSet):
+    queryset = Comments.objects.all()
+    serializer_class = CommentsSerializer
+    permission_classes = (AllowAny, )
