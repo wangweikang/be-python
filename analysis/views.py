@@ -12,3 +12,4 @@ def ping(request):
     cnt = rds.get('count')
     cnt = '0' if cnt is None else cnt
     return HttpResponse(cnt)
+    

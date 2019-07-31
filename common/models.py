@@ -9,9 +9,9 @@ class BaseManager(models.Manager):
 
 class BaseModel(models.Model):
     comment = models.TextField(verbose_name='备注', blank=True)
-    # created_time = models.DateTimeField(auto_now_add=True)
-    # updated_time = models.DateTimeField(auto_now=True)
-    # is_deleted = models.BooleanField(default=False, db_index=True)
+    created_time = models.DateTimeField(auto_now_add=True)
+    updated_time = models.DateTimeField(auto_now=True)
+    is_deleted = models.BooleanField(default=False, db_index=True)
 
     objects = BaseManager()
 
