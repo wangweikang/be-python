@@ -3,6 +3,8 @@ version: "3.5"
 services:
   db:
     image: mysql:5.7
+    ports:
+      - 3306:3306
     environment:
       - MYSQL_HOST=localhost
       - MYSQL_DATABASE=docker
@@ -10,7 +12,9 @@ services:
       - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=root
     volumes:
+      - ./data/my.cnf:/etc/mysql/conf.d/mysqlutf8.cnf  # 原生的镜像不支持中文 加上这个和下面命令行可支持utf8
       - ./data/mysql:/var/lib/mysql
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     networks:
       - web_net
 
@@ -18,7 +22,6 @@ services:
     image: registry.thiswjk.xyz/will/web:latest
     volumes:
       - ./:/mysite
-      - /tmp/logs:/tmp
     networks:
       - nginx-net
       - web_net

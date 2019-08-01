@@ -8,7 +8,7 @@ WORKDIR /mysite
 
 #将当前目录加入到工作目录中
 ADD . /mysite
-RUN pip3 install -i https://pypi.douban.com/simple -r requirements.txt
+RUN pip3 install --upgrade pip -i https://pypi.douban.com/simple -r requirements.txt
 
 ENTRYPOINT ["sh", "start.sh"]
 
