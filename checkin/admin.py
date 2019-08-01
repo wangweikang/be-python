@@ -1,3 +1,6 @@
 from django.contrib import admin
+from checkin.models import WxUser, Comments
 
-# Register your models here.
+
+admin.site.register(WxUser)
+admin.site.register(Comments)
