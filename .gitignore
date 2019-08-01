@@ -106,4 +106,4 @@ venv.bak/
 data
 db.sqlite3_1
 .idea
-static/
+static
