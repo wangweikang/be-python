@@ -16,3 +16,10 @@ class WxUser(BaseModel):
 class Comments(BaseModel):
     user = models.ForeignKey(WxUser, on_delete=models.CASCADE)
     comments = models.CharField(verbose_name='留言', max_length=1000)
+
+    class Meta:
+        verbose_name = '留言'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.comments

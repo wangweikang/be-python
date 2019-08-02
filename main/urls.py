@@ -24,10 +24,10 @@ from polls.urls import urlpatterns as polls_urls
 from checkin.urls import urlpatterns as checkin_urls
 
 urlpatterns = [
-    path('superadmin/', admin.site.urls),
-    path('/', include(common_urls)),
-    path('analysis/', include(analysis_urls)),
-    path('polls/', include(polls_urls)),
-    path('checkin/', include(checkin_urls)),
+    path(r'superadmin/', admin.site.urls),
+    path(r'/', include(common_urls)),
+    path(r'analysis/', include(analysis_urls)),
+    path(r'polls/', include(polls_urls)),
+    path(r'wx/', include(checkin_urls)),
     re_path(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}, name='static'),
 ]
