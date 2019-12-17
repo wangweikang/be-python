@@ -1,0 +1,16 @@
+version: "3"
+services:
+  hfish:
+    image: imdevops/hfish
+    environment:
+      USERNAME: Will
+      VIRTUAL_HOST: admin.thiswjk.xyz
+      VIRTUAL_PORT: 9001
+      LETSENCRYPT_HOST: admin.thiswjk.xyz
+      LETSENCRYPT_EMAIL: kangmang92@gmail.com
+    networks:
+      - nginx-net
+
+networks:
+  nginx-net:
+    external: true
