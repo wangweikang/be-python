@@ -31,7 +31,7 @@ API_DESCRIPTION = '我的Api服务'
 
 urlpatterns = [
     path(r'super/', admin.site.urls),
-    # path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),  ## 右上角的登录入口
     # path(r'^api-token-auth/', obtain_auth_token),   # drf 自带的 token 认证模式
     path(r'common/', include(common_urls)),  # jwt 的认证接口
     path(r'analysis/', include(analysis_urls)),
